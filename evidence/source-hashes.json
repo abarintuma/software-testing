@@ -1,0 +1,8 @@
+{
+  "description": "SHA-256 hashes of tested source files; initial source contains a deliberately seeded teaching defect.",
+  "files": {
+    "budget.py": "c5431d40c434f2c4dfee20e4c0216ece78e14cc11315e0f596c59a677314f7ad",
+    "test_budget.py": "4d20afd3dae4eaea97ba756fc9f4c5b6aed30eea3c2c90601d946021818ac5e1",
+    "evidence/initial-budget.py.txt": "fbcbc61a1baec429030d2b6d08b85b5573325285060ac897378f029b47f42bf2"
+  }
+}

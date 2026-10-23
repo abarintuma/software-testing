@@ -1,0 +1,88 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.14, pytest-8.3.5, pluggy-1.7.0 -- /workspace/scratch/bd866413358f/assignment-venv/bin/python
+cachedir: .pytest_cache
+rootdir: /workspace/scratch/bd866413358f/software-testing
+configfile: pytest.ini
+testpaths: .
+collecting ... collected 22 items
+
+test_budget.py::test_TC01_normal_surplus PASSED                          [  4%]
+test_budget.py::test_TC02_normal_deficit PASSED                          [  9%]
+test_budget.py::test_TC03_equal_income_and_expenses FAILED               [ 13%]
+test_budget.py::test_TC04_both_amounts_zero FAILED                       [ 18%]
+test_budget.py::test_TC05_zero_expenses PASSED                           [ 22%]
+test_budget.py::test_TC06_zero_income PASSED                             [ 27%]
+test_budget.py::test_TC07_one_shilling_surplus PASSED                    [ 31%]
+test_budget.py::test_TC08_one_shilling_deficit PASSED                    [ 36%]
+test_budget.py::test_TC09_one_shilling_each FAILED                       [ 40%]
+test_budget.py::test_TC10_large_amounts PASSED                           [ 45%]
+test_budget.py::test_TC11_negative_income PASSED                         [ 50%]
+test_budget.py::test_TC12_negative_expenses PASSED                       [ 54%]
+test_budget.py::test_TC13_text_income PASSED                             [ 59%]
+test_budget.py::test_TC14_text_expenses PASSED                           [ 63%]
+test_budget.py::test_TC15_fractional_income PASSED                       [ 68%]
+test_budget.py::test_TC16_fractional_expenses PASSED                     [ 72%]
+test_budget.py::test_TC17_boolean_income PASSED                          [ 77%]
+test_budget.py::test_TC18_boolean_expenses PASSED                        [ 81%]
+test_budget.py::test_TC19_none_income PASSED                             [ 86%]
+test_budget.py::test_TC20_none_expenses PASSED                           [ 90%]
+test_budget.py::test_TC21_list_expenses PASSED                           [ 95%]
+test_budget.py::test_TC22_float_with_no_fraction PASSED                  [100%]
+
+=================================== FAILURES ===================================
+_____________________ test_TC03_equal_income_and_expenses ______________________
+
+    def test_TC03_equal_income_and_expenses():
+>       assert calculate_budget(200_000, 200_000) == {
+            "balance": 0, "status": "balanced"
+        }
+E       AssertionError: assert {'balance': 0...s': 'surplus'} == {'balance': 0...': 'balanced'}
+E         
+E         Omitting 1 identical items, use -vv to show
+E         Differing items:
+E         {'status': 'surplus'} != {'status': 'balanced'}
+E         
+E         Full diff:
+E           {...
+E         
+E         ...Full output truncated (4 lines hidden), use '-vv' to show
+
+test_budget.py:25: AssertionError
+_________________________ test_TC04_both_amounts_zero __________________________
+
+    def test_TC04_both_amounts_zero():
+>       assert calculate_budget(0, 0) == {"balance": 0, "status": "balanced"}
+E       AssertionError: assert {'balance': 0...s': 'surplus'} == {'balance': 0...': 'balanced'}
+E         
+E         Omitting 1 identical items, use -vv to show
+E         Differing items:
+E         {'status': 'surplus'} != {'status': 'balanced'}
+E         
+E         Full diff:
+E           {...
+E         
+E         ...Full output truncated (4 lines hidden), use '-vv' to show
+
+test_budget.py:31: AssertionError
+_________________________ test_TC09_one_shilling_each __________________________
+
+    def test_TC09_one_shilling_each():
+>       assert calculate_budget(1, 1) == {"balance": 0, "status": "balanced"}
+E       AssertionError: assert {'balance': 0...s': 'surplus'} == {'balance': 0...': 'balanced'}
+E         
+E         Omitting 1 identical items, use -vv to show
+E         Differing items:
+E         {'status': 'surplus'} != {'status': 'balanced'}
+E         
+E         Full diff:
+E           {...
+E         
+E         ...Full output truncated (4 lines hidden), use '-vv' to show
+
+test_budget.py:55: AssertionError
+- generated xml file: /workspace/scratch/bd866413358f/software-testing/evidence/initial-results.xml -
+=========================== short test summary info ============================
+FAILED test_budget.py::test_TC03_equal_income_and_expenses - AssertionError: ...
+FAILED test_budget.py::test_TC04_both_amounts_zero - AssertionError: assert {...
+FAILED test_budget.py::test_TC09_one_shilling_each - AssertionError: assert {...
+========================= 3 failed, 19 passed in 0.03s =========================

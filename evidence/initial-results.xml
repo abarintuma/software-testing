@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="22" time="0.033" timestamp="2026-10-23T09:43:12.953531+02:00" hostname="833b23e3b4e9"><testcase classname="test_budget" name="test_TC01_normal_surplus" time="0.000" /><testcase classname="test_budget" name="test_TC02_normal_deficit" time="0.000" /><testcase classname="test_budget" name="test_TC03_equal_income_and_expenses" time="0.001"><failure message="AssertionError: assert {'balance': 0...s': 'surplus'} == {'balance': 0...': 'balanced'}&#10;  &#10;  Omitting 1 identical items, use -vv to show&#10;  Differing items:&#10;  {'status': 'surplus'} != {'status': 'balanced'}&#10;  &#10;  Full diff:&#10;    {...&#10;  &#10;  ...Full output truncated (4 lines hidden), use '-vv' to show">def test_TC03_equal_income_and_expenses():
+&gt;       assert calculate_budget(200_000, 200_000) == {
+            "balance": 0, "status": "balanced"
+        }
+E       AssertionError: assert {'balance': 0...s': 'surplus'} == {'balance': 0...': 'balanced'}
+E         
+E         Omitting 1 identical items, use -vv to show
+E         Differing items:
+E         {'status': 'surplus'} != {'status': 'balanced'}
+E         
+E         Full diff:
+E           {...
+E         
+E         ...Full output truncated (4 lines hidden), use '-vv' to show
+
+test_budget.py:25: AssertionError</failure></testcase><testcase classname="test_budget" name="test_TC04_both_amounts_zero" time="0.000"><failure message="AssertionError: assert {'balance': 0...s': 'surplus'} == {'balance': 0...': 'balanced'}&#10;  &#10;  Omitting 1 identical items, use -vv to show&#10;  Differing items:&#10;  {'status': 'surplus'} != {'status': 'balanced'}&#10;  &#10;  Full diff:&#10;    {...&#10;  &#10;  ...Full output truncated (4 lines hidden), use '-vv' to show">def test_TC04_both_amounts_zero():
+&gt;       assert calculate_budget(0, 0) == {"balance": 0, "status": "balanced"}
+E       AssertionError: assert {'balance': 0...s': 'surplus'} == {'balance': 0...': 'balanced'}
+E         
+E         Omitting 1 identical items, use -vv to show
+E         Differing items:
+E         {'status': 'surplus'} != {'status': 'balanced'}
+E         
+E         Full diff:
+E           {...
+E         
+E         ...Full output truncated (4 lines hidden), use '-vv' to show
+
+test_budget.py:31: AssertionError</failure></testcase><testcase classname="test_budget" name="test_TC05_zero_expenses" time="0.000" /><testcase classname="test_budget" name="test_TC06_zero_income" time="0.000" /><testcase classname="test_budget" name="test_TC07_one_shilling_surplus" time="0.000" /><testcase classname="test_budget" name="test_TC08_one_shilling_deficit" time="0.000" /><testcase classname="test_budget" name="test_TC09_one_shilling_each" time="0.000"><failure message="AssertionError: assert {'balance': 0...s': 'surplus'} == {'balance': 0...': 'balanced'}&#10;  &#10;  Omitting 1 identical items, use -vv to show&#10;  Differing items:&#10;  {'status': 'surplus'} != {'status': 'balanced'}&#10;  &#10;  Full diff:&#10;    {...&#10;  &#10;  ...Full output truncated (4 lines hidden), use '-vv' to show">def test_TC09_one_shilling_each():
+&gt;       assert calculate_budget(1, 1) == {"balance": 0, "status": "balanced"}
+E       AssertionError: assert {'balance': 0...s': 'surplus'} == {'balance': 0...': 'balanced'}
+E         
+E         Omitting 1 identical items, use -vv to show
+E         Differing items:
+E         {'status': 'surplus'} != {'status': 'balanced'}
+E         
+E         Full diff:
+E           {...
+E         
+E         ...Full output truncated (4 lines hidden), use '-vv' to show
+
+test_budget.py:55: AssertionError</failure></testcase><testcase classname="test_budget" name="test_TC10_large_amounts" time="0.000" /><testcase classname="test_budget" name="test_TC11_negative_income" time="0.000" /><testcase classname="test_budget" name="test_TC12_negative_expenses" time="0.000" /><testcase classname="test_budget" name="test_TC13_text_income" time="0.000" /><testcase classname="test_budget" name="test_TC14_text_expenses" time="0.000" /><testcase classname="test_budget" name="test_TC15_fractional_income" time="0.000" /><testcase classname="test_budget" name="test_TC16_fractional_expenses" time="0.000" /><testcase classname="test_budget" name="test_TC17_boolean_income" time="0.000" /><testcase classname="test_budget" name="test_TC18_boolean_expenses" time="0.000" /><testcase classname="test_budget" name="test_TC19_none_income" time="0.000" /><testcase classname="test_budget" name="test_TC20_none_expenses" time="0.000" /><testcase classname="test_budget" name="test_TC21_list_expenses" time="0.000" /><testcase classname="test_budget" name="test_TC22_float_with_no_fraction" time="0.000" /></testsuite></testsuites>
