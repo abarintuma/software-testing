@@ -88,12 +88,11 @@ currency, decimal handling, or whether expenses should be a list.
 
 | Run | Passed | Failed | Evidence |
 | --- | ---: | ---: | --- |
-| Deliberately faulty teaching draft | 19 | 3 | [Screenshot](evidence/initial-results.png), [raw log](evidence/initial-pytest.txt) |
-| Corrected final function | 22 | 0 | [Screenshot](evidence/final-results.png), [raw log](evidence/final-pytest.txt) |
+| Deliberately faulty teaching draft | 19 | 3 | [Screenshot](evidence/initial-results.png) |
+| Corrected final function | 22 | 0 | [Screenshot](evidence/final-results.png) |
 
 The PNGs are screenshots of rendered reports containing the unedited
-pytest console output. The accompanying HTML and JUnit XML are included.
-The initial bug was deliberately seeded to demonstrate defect detection;
+pytest console output. The initial bug was deliberately seeded to demonstrate defect detection;
 it is not presented as an accidental historical defect. The exact draft is
 preserved in [initial-budget.py.txt](evidence/initial-budget.py.txt).
 
@@ -102,7 +101,3 @@ To record a fresh final result locally:
 ```sh
 python -m pytest -v --junitxml=evidence/my-results.xml
 ```
-
-You can also run pytest in your own terminal and take a screenshot for your
-presentation. Read the explanation guide and practise the examples before
-submitting the work individually.

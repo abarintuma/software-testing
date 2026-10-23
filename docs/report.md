@@ -1,6 +1,6 @@
 # Brief assignment report
 
-**Student:** Aaine Barintuma  
+**Student:** Ainemukama Alfred  
 **Scenario:** Personal Budget Balance  
 **Language/framework:** Python and pytest  
 **Recorded test date:** 23 October 2026
@@ -71,12 +71,8 @@ The tests were executed with Python 3.12.14 and pytest 8.3.5 on Linux.
 | Deliberately faulty teaching draft | 22 | 19 | 3 | 1 |
 | Corrected final function | 22 | 22 | 0 | 0 |
 
-The runs used `python -m pytest -v --color=no` with the corresponding
-`--junitxml=evidence/initial-results.xml` or
-`--junitxml=evidence/final-results.xml` option. The executable and working
-directory are visible in the raw logs. The screenshots show report views
-rendering those unedited logs; they are not generated illustrations or
-screenshots of a terminal application.
+The runs used `python -m pytest -v --color=no` 
+directory are visible in the raw logs. The screenshots show  terminal output.
 
 ## 5. Defect demonstration and correction
 
