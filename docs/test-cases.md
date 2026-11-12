@@ -2,8 +2,7 @@
 
 Function: `calculate_budget(income, expenses)`. Inputs are whole UGX totals for the same period.
 
-Actual results below were obtained by calling the final function. Each row also maps to a
-separate pytest test whose name begins with its case ID. The final JUnit XML records all 22 as passed.
+The table records the results of the final function. Each case corresponds to one automated test in `test_budget.py`. All 22 tests passed in the verification run on 12 November 2026.
 
 | Test Case ID | Category | Input `(income, expenses)` | Expected Result | Actual Result (final) | Status |
 | --- | --- | --- | --- | --- | --- |

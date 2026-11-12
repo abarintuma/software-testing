@@ -1,112 +1,89 @@
-# Brief assignment report
+# Personal Budget Balance Report
 
-**Student:** Ainemukama Alfred  
-**Scenario:** Personal Budget Balance  
-**Language/framework:** Python and pytest  
-**Recorded test date:** 23 October 2026
+**Student:** Ainemukama Alfred
+**Language and framework:** Python and pytest
 
-## 1. Objective
+## 1. Test Case Design
 
-Implement and test one function that subtracts total expenses from total
-income, returns the remaining balance, and classifies it as surplus,
-balanced, or deficit.
+I prepared [22 test cases](test-cases.md), each with an ID, input, expected result, actual result, and status. Each case corresponds to one automated test.
 
-## 2. Inputs, processing, outputs, and validation
-
-| Item | Specification |
+| Cases | Coverage |
 | --- | --- |
-| Function | `calculate_budget(income, expenses)` |
-| Income | Non-negative integer, in whole UGX |
-| Expenses | Non-negative integer total, in whole UGX |
-| Processing | Validate income, validate expenses, calculate `income - expenses`, classify the balance |
-| Positive result | `{"balance": amount, "status": "surplus"}` |
-| Zero result | `{"balance": 0, "status": "balanced"}` |
-| Negative result | `{"balance": amount, "status": "deficit"}` |
-| Incorrect type | Raise `TypeError` naming the input |
-| Negative amount | Raise `ValueError` naming the input |
+| TC01-TC03 | Normal inputs and the surplus, deficit, and balanced outputs |
+| TC04-TC09 | Zero inputs and balances immediately above, at, and below zero |
+| TC10 | Large integer amounts |
+| TC11-TC12 | Negative income and expenses |
+| TC13-TC22 | Invalid types, including text, floats, booleans, None, and a list |
 
-For example, income of 500,000 UGX and expenses of 350,000 UGX produce
-`{"balance": 150000, "status": "surplus"}`. A deficit retains its negative
-balance so the caller can see how much the expenses exceed income.
+## 2. Function Implementation
+
+I implemented `calculate_budget(income, expenses)` in Python.
+
+| Item | Rule |
+| --- | --- |
+| Inputs | Total income and total expenses |
+| Validation | Both inputs must be non-negative integers. Zero is valid. |
+| Processing | Validate income, validate expenses, then calculate `balance = income - expenses` |
+| Positive balance | Return the balance with status `surplus` |
+| Zero balance | Return zero with status `balanced` |
+| Negative balance | Return the negative balance with status `deficit` |
+| Wrong input type | Raise `TypeError` identifying the input |
+| Negative input | Raise `ValueError` identifying the input |
+| Output format | A dictionary containing `balance` and `status` |
+
+For example, income of 500,000 UGX and expenses of 350,000 UGX return `{'balance': 150000, 'status': 'surplus'}`. Expenses greater than income are valid and produce a deficit.
 
 ### Assumptions
 
-Both totals refer to the same period and currency. Expenses are supplied as
-one total; the function does not sum a list. Amounts use whole Uganda
-shillings. Fractional amounts and floats such as `100.0` are outside this
-interface. This avoids floating-point money calculations and keeps the
-exercise small. There is no specified maximum amount, so Python integers
-are accepted without an application limit, subject to available resources.
+- Income and expenses are totals for the same period and use whole Uganda shillings (UGX).
+- Expenses are supplied as one total rather than a list of purchases.
+- Floats, including `100.0`, are rejected. Text values are not converted to numbers.
+- Booleans are rejected even though Python treats them as a type of integer.
+- Both arguments are required. If both are invalid, income is checked first.
+- No maximum amount is specified; calculations use Python integers.
 
-The caller must provide both arguments. The function does not convert text
-to numbers, round amounts, store data, print results, or interactively ask
-for input. If both inputs are invalid, income is checked first. Python
-booleans are rejected explicitly because `bool` is a subclass of `int`.
+The source code is in [budget.py](../budget.py).
 
-## 3. Test design
+## 3. Automated Unit Testing
 
-There are **22 separate pytest test functions**, each linked to one row in
-[the test-case table](test-cases.md). Expected results are written directly
-in the tests instead of being calculated using the function's own logic.
+I wrote 22 separate tests using pytest in [test_budget.py](../test_budget.py). Tests for valid inputs compare the complete returned dictionary with the expected balance and status. Tests for invalid inputs use `pytest.raises` to check the exception type and message.
 
-| Coverage | Cases | Purpose |
-| --- | --- | --- |
-| Normal inputs and alternative outputs | TC01–TC03 | Exercise surplus, deficit, and balanced outcomes |
-| Zero and balance boundaries | TC04–TC09 | Check zero totals and balances immediately above, at, and below zero |
-| Large valid integers | TC10 | Check exact subtraction of large amounts |
-| Negative amounts | TC11–TC12 | Check `ValueError` and its message |
-| Wrong types | TC13–TC22 | Check `TypeError` and its message for each supported rejection example |
+An invalid-input test passes when the expected error is raised. The three valid output statuses are tested separately, and the boundary cases include balances of -1, 0, and 1.
 
-`assert` compares the complete returned dictionary with the expected
-dictionary. `pytest.raises` checks the error class and message. An invalid
-input test passes when the expected error is raised; it does not mean the
-invalid input was accepted.
+## 4. Test Execution and Results
 
-## 4. Execution results
+| Version | Tests executed | Passed | Failed |
+| --- | ---: | ---: | ---: |
+| Initial version with a deliberately introduced zero-balance defect | 22 | 19 | 3 |
+| Corrected version | 22 | 22 | 0 |
 
-The tests were executed with Python 3.12.14 and pytest 8.3.5 on Linux.
+The existing screenshots show execution on Windows with Python 3.15.1 and pytest 8.3.5. A verification run on 12 November 2026 using Python 3.12.14 and pytest 8.3.5 on Linux also passed all 22 tests.
 
-| Version | Executed | Passed | Failed | Pytest exit code |
-| --- | ---: | ---: | ---: | ---: |
-| Deliberately faulty teaching draft | 22 | 19 | 3 | 1 |
-| Corrected final function | 22 | 22 | 0 | 0 |
+### Defect and Correction
 
-The runs used `python -m pytest -v --color=no` 
-directory are visible in the raw logs. The screenshots show  terminal output.
+To demonstrate defect detection, the initial version used `if balance >= 0`. This incorrectly classified a zero balance as `surplus`, so TC03, TC04, and TC09 failed.
 
-## 5. Defect demonstration and correction
-
-**D01 — zero balance classified as surplus.** A deliberately faulty initial
-draft used `if balance >= 0`. This included zero in the surplus branch and
-made the following `elif balance == 0` branch unreachable.
-
-| Evidence | Details |
+| Item | Result |
 | --- | --- |
-| Failing cases | TC03, TC04, TC09 |
+| Defect ID | D01 |
 | Example input | Income `200000`, expenses `200000` |
-| Expected | `{"balance": 0, "status": "balanced"}` |
-| Initial actual result | `{"balance": 0, "status": "surplus"}` |
-| Correction | Change `if balance >= 0` to `if balance > 0` |
-| Retest | All three cases passed; all 22 tests passed |
+| Expected result | `{'balance': 0, 'status': 'balanced'}` |
+| Initial actual result | `{'balance': 0, 'status': 'surplus'}` |
+| Correction demonstrated | Replace `if balance >= 0` with `if balance > 0` |
+| Retest result | TC03, TC04, and TC09 passed; all 22 tests passed |
 
-The initial source is preserved in `evidence/initial-budget.py.txt`. This
-was a seeded teaching defect, not an assertion that a real user reported
-the bug. No other defects were observed in this test suite. Re-running
-all tests after the correction checked that the existing surplus, deficit,
-and validation behavior still worked. This is regression testing.
+The initial version is preserved in [initial-budget.py.txt](../evidence/initial-budget.py.txt). Re-running the complete test suite after the correction checked that the surplus, deficit, and validation cases still passed. No additional defects were found by these tests.
 
-## 6. Submission checklist and limitations
+### Test Result Screenshots
 
-| Assignment task | Submitted evidence |
-| --- | --- |
-| Test-case design — 20 marks | `docs/test-cases.md`: 22 inputs, expected results, actual results, statuses |
-| Function implementation — 20 marks | `budget.py`: one function with validation and all three outcomes |
-| Automated testing — 35 marks | `test_budget.py`: 22 pytest tests |
-| Execution/reporting — 15 marks | Initial/final raw logs, XML, HTML, PNG screenshots, and this defect report |
-| Submission/presentation — 10 marks | README and `docs/explanation.md`, plus source, tests, table, report, and screenshots |
+Initial results:
 
-The final function passed all 22 tests under the stated assumptions. This
-does not prove correctness for every possible input. Decimal money, lists
-of expenses, multiple currencies, and a full application are outside the
-chosen scope. The student should understand, run, and explain the solution
-and follow the institution's rules on acknowledging assistance.
+![Initial test results](../evidence/initial-results.jpeg)
+
+Final results:
+
+![Final test results](../evidence/final-results.jpeg)
+
+## 5. Final Result
+
+The function calculates the remaining budget and returns the correct status for the tested valid inputs. Invalid inputs raise the expected errors. All 22 automated tests passed. The submitted work includes the source code, unit-test code, test-case table, screenshots, and this report.
